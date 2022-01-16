@@ -6,6 +6,7 @@ import pandas as pd
 from createModel import getTrainingSet, createDataFrame
 from configureCWD import setCurrentWorkingDirectory
 
+flag = False
 
 # Exports game information for all games between specified time period to 'Data' Folder within project
 # End date will not be included in range
@@ -86,6 +87,8 @@ def makePastPredictions(startYear, startMonth, startDay, endYear, endMonth, endD
                           gameDataFilename)
     # Makes probabilities for range of games
     getPredictionsCSV(gameDataFilename, outputFilename)
+    # created by chan
+    flag = True
 
 
 # start date (yyyy, m, d) (must be at least three days after start of season), end date (yyyy, m, d) (non-inclusive),
@@ -94,6 +97,11 @@ def makePastPredictions(startYear, startMonth, startDay, endYear, endMonth, endD
 # EDIT THIS
 
 # look at chan created in the Get State.py and Standardizestats.py to modif
-makePastPredictions(2020, 12, 22, 2021, 5, 16, '2020-21', '12/22/2020',
-                    'gamesWithInfo.csv', 'predictions.csv')
+while flag == False:
+    try: 
+        makePastPredictions(2021, 10, 19, 2022, 4, 10, '2021-22', '10/19/2021',
+                            'gamesWithInfo.csv', 'predictions.csv')
+    except:
+        pass
+
 

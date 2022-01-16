@@ -10,6 +10,7 @@ from availableStats import availableStats
 from getStats import getStatsForTeam
 from configureCWD import setCurrentWorkingDirectory
 
+result = []
 
 # Returns list of games with Z-Score differentials between teams to be put into a Pandas dataframe
 # startDate & endDate should be 'mm/dd/yyyy' form
@@ -67,6 +68,7 @@ def interpretPredictions(gamesWithPredictions):
     dailyGames = gamesWithPredictions[0]  # Dict holding daily matchups
     probabilityPredictions = gamesWithPredictions[1]  # List of lists holding probs of loss/win for home team
 
+    result.clear()
     for gameNum in range(len(probabilityPredictions)):  # Loops through each game
         winProb = probabilityPredictions[gameNum][1]
         winProbRounded = round(winProb,4)
@@ -76,7 +78,8 @@ def interpretPredictions(gamesWithPredictions):
         awayTeam = list(dailyGames.values())[gameNum]
 
         print(' 이번경기 ' + winProbPercent + ' 퍼센트로 ' + homeTeam + '은' + awayTeam + '을 이길 것입니다.')
-
+        result.append(' 이번경기 ' + winProbPercent + ' 퍼센트로 ' + homeTeam + '은' + awayTeam + '을 이길 것입니다.')
+    
 
 # Fetches games on set date and returns predictions for each game
 # currentDate/startOfSeason should be in form 'mm/dd/yyyy' and season in form 'yyyy-yy'
@@ -92,4 +95,4 @@ def makeInterpretPredictions(currentDate, season, startOfSeason):
 
 # EDIT THIS
 # First arg is date to predict (mm/dd/yyyy), second is season (yyyy-yy), and third is start date of season (mm/dd/yyyy)
-makeInterpretPredictions('01/15/2022', '2021-22', '10/19/2021')
+makeInterpretPredictions('01/16/2022', '2021-22', '10/19/2021')
